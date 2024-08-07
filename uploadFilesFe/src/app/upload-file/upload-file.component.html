@@ -1,0 +1,39 @@
+
+<div class="upload-file">
+<div class="titel"></div>
+ <div class="flex">
+<div class="upload-container">
+     <label class="message">{{message}}</label>
+ <input class="titelText" type="text" placeholder="הכנס כותרת" [(ngModel)]="selectedFileName">
+  <div class="file-upload">
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx" hidden>
+          <br><div class="up">
+          <label for="fileInput" class="file-upload-label">
+            <span class="material-symbols-outlined">
+              ios_share
+              </span>
+              <div *ngIf="selectedFile">
+            <p> {{ selectedFile.name }}</p>
+          </div>
+            העלה קובץ
+          </label></div>
+ <button class="send" (click)="uploadFile()">שלח</button> 
+  </div>
+</div>
+
+</div>
+
+<div class="context-menu" [ngClass]="{'show': showMenu}" (click)="toggleMenu($event)">
+  <div class="fileList" *ngFor="let file of uploadedFiles$ | async" (click)="stopPropagation($event)">
+    <a [href]="file.url" download>
+      <span class="material-symbols-outlined">
+        system_update_alt
+      </span>
+    </a>   
+    <div class="nameFileList">{{ file.name }} </div>
+  </div>
+</div>
+
+<button class="menu-toggle" (click)="toggleMenu($event)"></button>
+<div class="numberFile" >{{numberFile}}</div>
+</div>

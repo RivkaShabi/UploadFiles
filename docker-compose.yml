@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  upload-file-be:
+    build:
+      dockerfile: Dockerfile
+      context: ./upload-file-be
+      target: build-backend
+    volumes:
+      - ./upload-file-be:/thomas/src/app
+      - /thomas/src/app/node_modules/
+    command: npm run start
+    ports:
+      - 3000:3000
+  
+  upload-files-fe:
+    build:
+      dockerfile: Dockerfile
+      context: ./uploadFilesFe
+      target: build-frontend
+    command: npm run start
+    volumes:
+      - ./uploadFilesFe:/thomas/frontend/src/app
+      - /thomas/frontend/src/app/node_modules
+    ports:
+      - 4200:4200
